@@ -1,0 +1,78 @@
+<div class="signin">
+  <p-card class="signin-card signup-card">
+    <ng-template pTemplate="header">
+      <h4 class="signin-card-title">SIGN-UP</h4>
+    </ng-template>
+    <div class="signin-card-body">
+      <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <div class="p-field">
+            <label for="signin-username" class="label-login">Username</label>
+            <input
+              id="signin-username"
+              class="signin-cred"
+              type="username"
+              aria-describedby="username1-help"
+              pInputText
+              formControlName="userName"
+            />
+            <p class="text-danger mt-1">
+              {{ validInput(registerForm.get("userName")) }}
+            </p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="p-field">
+            <label for="signin-password" class="label-login">Password</label>
+            <input
+              id="signin-password"
+              class="signin-cred"
+              type="password"
+              aria-describedby="password-help"
+              pInputText
+              formControlName="password"
+            />
+            <p class="text-danger mt-1">
+              {{ validInput(registerForm.get("password")) }}
+            </p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="p-field">
+            <label for="signin-password" class="label-login"
+              >Confirm Password</label
+            >
+            <input
+              id="signin-password"
+              class="signin-cred"
+              type="password"
+              aria-describedby="password-help"
+              pInputText
+              formControlName="confirmPassword"
+            />
+            <p class="text-danger mt-1">
+              {{ validInput(registerForm.get("confirmPassword")) }}
+            </p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button
+            pButton
+            type="button"
+            label="Create Account"
+            type="submit"
+            [disabled]="registerForm.invalid"
+          ></button>
+        </div>
+        <div class="mb-1 mt-1">
+          <p class="d-flex justify-content-center">
+            If you have already an account
+          </p>
+          <a class="d-flex justify-content-center" routerLink="/signin">
+            SignIn Account
+          </a>
+        </div>
+      </form>
+    </div>
+  </p-card>
+</div>
