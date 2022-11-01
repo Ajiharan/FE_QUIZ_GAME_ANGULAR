@@ -1,1 +1,24 @@
 <router-outlet></router-outlet>
+
+<p-toast
+  position="top-center"
+  key="custom"
+  (onClose)="onCustomReject()"
+  [baseZIndex]="5000"
+  class="custom-toast"
+>
+  <ng-template let-message pTemplate="message">
+    <div class="custom-toast-container">
+      <div class="custom-toast-container__icon">
+        <i class="pi pi-info-circle"></i>
+      </div>
+      <div class="custom-toast-container__message">
+        <h6>{{ message.detail }}</h6>
+        <p>{{ message.summary }}</p>
+        <!-- <div class="custom-toast-container__code">
+          {{ message.code }}
+        </div> -->
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

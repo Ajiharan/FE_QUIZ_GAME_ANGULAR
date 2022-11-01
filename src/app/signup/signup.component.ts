@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { distinctUntilChanged, Subscription } from 'rxjs';
 import { validInput } from '../lib/validator';
 import { AccountService } from '../services/account.service';
@@ -17,7 +18,7 @@ import { AccountService } from '../services/account.service';
 export class SignupComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private router: Router) {}
   registerForm: FormGroup = new FormGroup({
     userName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -56,6 +57,13 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     console.log('form', this.registerForm.value);
-    this.accountService.createAccount(this.registerForm.value);
+    this.accountService.createAccount(
+      this.registerForm.value,
+      (response: boolean) => {
+        if (response) {
+          this.router.navigateByUrl('signin');
+        }
+      }
+    );
   }
 }

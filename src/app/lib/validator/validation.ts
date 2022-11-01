@@ -16,16 +16,16 @@ function validInput(control: AbstractControl | null): string | null {
   }
   if (control?.hasError('required')) {
     if (controlName === 'userName') {
-      return 'UserName  is required';
+      return '*UserName  is required';
     }
     if (controlName === 'password') {
-      return 'Password  is required';
+      return '*Password  is required';
     }
-    return 'Confirm Password  is required';
+    return '*Confirm Password  is required';
   }
 
   if (control?.hasError('invalidPassword')) {
-    return "Password didn't match";
+    return "*Password didn't match";
   }
   return null;
 }
