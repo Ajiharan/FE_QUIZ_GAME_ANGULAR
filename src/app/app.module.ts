@@ -14,8 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { GameDashboardComponent } from './game-dashboard/game-dashboard.component';
+import { GamePlayComponent } from './game-play/game-play.component';
 @NgModule({
-  declarations: [AppComponent, SigninComponent, SignupComponent],
+  declarations: [AppComponent, SigninComponent, SignupComponent, GameDashboardComponent, GamePlayComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

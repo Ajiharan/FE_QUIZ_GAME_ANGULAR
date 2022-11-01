@@ -21,4 +21,18 @@ export class ToastsService {
       this.messageService.clear('custom');
     }, timer);
   }
+
+  showToast(message: string, timer = 3000): void {
+    this.messageService.clear();
+    this.messageService.add({
+      key: 's',
+      sticky: true,
+      severity: 'success',
+      summary: message,
+      closable: false,
+    });
+    setTimeout(() => {
+      this.messageService.clear('s');
+    }, timer);
+  }
 }

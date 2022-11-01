@@ -20,6 +20,26 @@ export class AccountService {
     this.http.post(`${this.baseUrl}/user/register`, data).subscribe({
       next: (data) => {
         console.log('data', data);
+        this.toastService.showToast('Account sucessfully created');
+        this.loadingService.isLoading = false;
+        func?.(true);
+      },
+      error: (err) => {
+        console.log('err', err);
+        this.toastService.showError(err);
+        this.loadingService.isLoading = false;
+        func?.(false);
+      },
+    });
+  }
+
+  signInAccount(data: any, func?: (response: boolean) => void): void {
+    this.loadingService.isLoading = true;
+
+    this.http.post(`${this.baseUrl}/user/login  `, data).subscribe({
+      next: (data) => {
+        console.log('data', data);
+        this.toastService.showToast('Login Sucessfully');
         this.loadingService.isLoading = false;
         func?.(true);
       },
