@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { validInput } from '../lib/validator';
 import { AccountService } from '../services/account.service';
 @Component({
@@ -13,7 +14,7 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./signin.component.scss'],
 })
 export class SigninComponent implements OnInit {
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private router: Router) {}
   signInForm: FormGroup = new FormGroup({
     userName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -28,7 +29,9 @@ export class SigninComponent implements OnInit {
     console.log('form', this.signInForm.value);
     this.accountService.signInAccount(
       this.signInForm.value,
-      (response: boolean) => {}
+      (response: boolean) => {
+        response && this.router.navigateByUrl('dashboard');
+      }
     );
   }
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
 import { AccordionModule } from 'primeng/accordion'; //accordion and accordion tab
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -12,12 +13,18 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
 import { GameDashboardComponent } from './game-dashboard/game-dashboard.component';
 import { GamePlayComponent } from './game-play/game-play.component';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
 @NgModule({
-  declarations: [AppComponent, SigninComponent, SignupComponent, GameDashboardComponent, GamePlayComponent],
+  declarations: [
+    AppComponent,
+    SigninComponent,
+    SignupComponent,
+    GameDashboardComponent,
+    GamePlayComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,7 +39,7 @@ import { GamePlayComponent } from './game-play/game-play.component';
     ToastModule,
     BrowserAnimationsModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

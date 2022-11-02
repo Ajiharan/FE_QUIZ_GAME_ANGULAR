@@ -13,7 +13,7 @@ export class ToastsService {
       key: 'custom',
       sticky: true,
       severity: 'error',
-      summary: err.error,
+      summary: err.error || 'something wrong',
       detail: 'Authentication Error',
       closable: false,
     });
