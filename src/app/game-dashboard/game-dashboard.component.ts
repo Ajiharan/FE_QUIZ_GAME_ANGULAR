@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 
 @Component({
@@ -8,11 +9,19 @@ import { AccountService } from '../services/account.service';
 })
 export class GameDashboardComponent implements OnInit {
   public userDetails: any;
-  constructor(public accountService: AccountService) {
+  public highScoreDetail: any;
+  constructor(public accountService: AccountService, private router: Router) {
     this.accountService.getUser((data: any) => {
       this.userDetails = data;
+    });
+    this.accountService.getHighScore((data: any) => {
+      this.highScoreDetail = data;
     });
   }
 
   ngOnInit(): void {}
+
+  startQuiz(): void {
+    this.router.navigateByUrl('quiz');
+  }
 }

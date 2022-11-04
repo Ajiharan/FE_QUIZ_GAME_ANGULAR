@@ -7,7 +7,9 @@ body {
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 15px;
 }
-
+.signin {
+  background-image: url("assets/images/back2.jpg");
+}
 .p-field {
   display: flex;
   flex-direction: column;
@@ -37,4 +39,20 @@ body {
 }
 .signup-card {
   height: 70%;
+}
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid rgb(80, 161, 247);
+
+  &-avatar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0 0.5rem;
+    border-left: 1px solid rgb(141, 141, 141);
+    cursor: pointer;
+  }
 }

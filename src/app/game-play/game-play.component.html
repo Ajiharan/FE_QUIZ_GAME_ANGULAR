@@ -1,1 +1,27 @@
-<p>game-play works!</p>
+<div class="signin">
+  <p-card class="signin-card game-card">
+    <ng-template pTemplate="header">
+      <div class="dashboard-header">
+        <div class="dashboard-header-title">
+          <h5>Timer {{ level1Timer }}s</h5>
+          <div class="game-life">
+            <i
+              class="pi pi-heart-fill"
+              style="font-size: 2rem; color: red; margin-left: 0.5rem"
+              *ngFor="let item of getLifeArray()"
+            ></i>
+            <i
+              class="pi pi-heart"
+              style="font-size: 2rem; color: red; margin-left: 0.5rem"
+              *ngFor="let item of getLostLifeArray()"
+            ></i>
+          </div>
+          <h5>Score: {{ score }}</h5>
+        </div>
+        <app-user-avatar-profile
+          [userDetails]="userDetails"
+        ></app-user-avatar-profile>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

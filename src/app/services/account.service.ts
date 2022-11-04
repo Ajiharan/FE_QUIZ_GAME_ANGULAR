@@ -76,4 +76,18 @@ export class AccountService {
         },
       });
   }
+
+  getHighScore(func: (response: any) => void): void {
+    this.http
+      .get(`${this.baseUrl}/board/getScores`, this.masterService.getHeaders())
+      .subscribe({
+        next: (data: any) => {
+          console.log('data', data);
+          func(data);
+        },
+        error: (err) => {
+          this.toastService.showError(err);
+        },
+      });
+  }
 }

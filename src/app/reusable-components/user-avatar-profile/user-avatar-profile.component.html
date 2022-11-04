@@ -1,0 +1,33 @@
+<div class="dashboard-header-avatar" (click)="menu.toggle($event)">
+  <p-avatar
+    image="../../assets/images/back2.jpg"
+    styleClass="mr-2"
+    shape="circle"
+  ></p-avatar>
+  <h6>
+    {{ userDetails.user.userName | titlecase }}
+  </h6>
+</div>
+<p-overlayPanel
+  class="user-menu"
+  #menu
+  [showCloseIcon]="false"
+  [style]="{ width: 'auto' }"
+>
+  <ng-template pTemplate>
+    <div class="profile-list">
+      <div *ngIf="userDetails.board">
+        <h6>
+          Your Score <span>{{ userDetails.board.highScore }}</span>
+        </h6>
+      </div>
+      <button
+        pButton
+        type="button"
+        class="p-button-outlined p-button-danger"
+        label="logout"
+        (click)="logout()"
+      ></button>
+    </div>
+  </ng-template>
+</p-overlayPanel>

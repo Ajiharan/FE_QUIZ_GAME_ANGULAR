@@ -15,4 +15,8 @@ export class HelperService {
   getToken(): string {
     return this.cookieService.get(this.cookieToken);
   }
+
+  removeToken(): void {
+    this.cookieService.deleteAll();
+  }
 }

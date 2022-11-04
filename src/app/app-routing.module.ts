@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GameDashboardComponent } from './game-dashboard/game-dashboard.component';
+import { GamePlayComponent } from './game-play/game-play.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
@@ -13,6 +14,12 @@ const routes: Routes = [
     path: 'dashboard',
     component: GameDashboardComponent,
     data: { title: 'Game Dashboard' },
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'quiz',
+    component: GamePlayComponent,
+    data: { title: 'Game' },
     canActivate: [AuthGuardService],
   },
 ];
