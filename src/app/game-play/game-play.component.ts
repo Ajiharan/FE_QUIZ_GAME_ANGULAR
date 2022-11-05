@@ -8,37 +8,97 @@ import { GameService } from '../services/game.service';
   styleUrls: ['./game-play.component.scss'],
 })
 export class GamePlayComponent implements OnInit {
+  private currentLevelTimer: number = 30;
   public userDetails: any;
-  public level1Timer: number = 30;
-  public level2Timer: number = 25;
-  public level3Timer: number = 20;
-  public level4Timer: number = 15;
+  public levelTimer: number;
 
-  public livesCount: number = 3;
-  public lostLifeCount: number = 0;
-  public score: number = 0;
+  public livesCount: number;
+  public lostLifeCount: number;
+  public score: number;
+
+  private interval: any;
+
+  public selectedValue: number | null;
+
+  public answerArr: number[];
+
+  public levelQuestionsCount: number;
+
+  public isFinished: boolean = false;
+
+  public highScoreDetail: any;
+  public myScoreDetails: any;
 
   public queAns: {
     question: string;
     solution: number;
   } | null = null;
 
-  constructor(
-    public accountService: AccountService,
-    private gameService: GameService
-  ) {
-    this.accountService.getUser((data: any) => {
-      this.userDetails = data;
-    });
+  public level: number;
+
+  getQuestion(): void {
+    if (this.levelQuestionsCount === 0) {
+      if (this.level === 1) {
+        this.levelQuestionsCount = 10;
+      } else if (this.level == 2) {
+        this.levelQuestionsCount = 15;
+      } else {
+        this.livesCount = 0;
+        this.isFinished = true;
+        return;
+      }
+
+      this.level = this.level + 1;
+      this.currentLevelTimer = this.currentLevelTimer - 5;
+    }
+    --this.levelQuestionsCount;
     this.gameService.getQuestion((data) => {
       this.queAns = data;
       this.startTimer();
     });
   }
 
+  getUserDetail(): void {
+    this.accountService.getUser((data: any) => {
+      this.userDetails = data;
+    });
+  }
+
+  constructor(
+    public accountService: AccountService,
+    private gameService: GameService
+  ) {
+    this.initializeGame();
+    this.getUserDetail();
+    this.getQuestion();
+  }
+
+  initializeGame(): void {
+    this.userDetails = null;
+    this.levelTimer = this.currentLevelTimer;
+    this.livesCount = 3;
+    this.lostLifeCount = 0;
+    this.score = 0;
+    this.interval = null;
+    this.answerArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    this.queAns = null;
+    this.level = 1;
+    this.levelQuestionsCount = 5;
+    this.selectedValue = null;
+  }
+
   startTimer(): void {
-    setInterval(() => {
-      --this.level1Timer;
+    this.selectedValue = null;
+    if (this.interval) {
+      clearInterval(this.interval);
+      this.levelTimer = this.currentLevelTimer;
+    }
+    this.interval = setInterval(() => {
+      --this.levelTimer;
+      if (this.levelTimer === 0) {
+        clearInterval(this.interval);
+        this.wrongAnswer();
+      }
     }, 1000);
   }
 
@@ -50,5 +110,51 @@ export class GamePlayComponent implements OnInit {
 
   getLostLifeArray(): any {
     return new Array(this.lostLifeCount);
+  }
+
+  wrongAnswer(): void {
+    --this.livesCount;
+    ++this.lostLifeCount;
+    this.score -= 1;
+    if (this.livesCount === 0) {
+      clearInterval(this.interval);
+      this.gameService.addScore(
+        {
+          score: this.score,
+          userName: this.userDetails.user.userName,
+          uid: this.userDetails.user._id,
+        },
+        () => {
+          this.getUserDetail();
+          this.getHighScoreDetails();
+        }
+      );
+      return;
+    }
+    this.getQuestion();
+  }
+
+  onRadioClick(event: any) {
+    if (this.queAns?.solution !== this.selectedValue) {
+      this.wrongAnswer();
+      return;
+    }
+    this.score += 2;
+    this.getQuestion();
+  }
+
+  startGame(): void {
+    this.initializeGame();
+    this.getUserDetail();
+    this.getQuestion();
+  }
+
+  getHighScoreDetails(): void {
+    this.accountService.getHighScore((data: any) => {
+      this.highScoreDetail = data;
+    });
+    this.accountService.getHighScore((data: any) => {
+      this.myScoreDetails = data;
+    }, `score/getScores/${this.userDetails.user._id}`);
   }
 }

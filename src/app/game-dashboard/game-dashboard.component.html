@@ -12,20 +12,8 @@
     </ng-template>
     <div class="grid">
       <div class="col-12 md:col-8 lg:col-8 sm:col-10">
-        <p-table [value]="highScoreDetail" *ngIf="highScoreDetail">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>userName</th>
-              <th>Score</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-item>
-            <tr>
-              <td>{{ item.userName }}</td>
-              <td>{{ item.highScore }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
+        <app-score-table [scoreDetail]="highScoreDetail" scoreName="highScore">
+        </app-score-table>
       </div>
       <div class="col-12 md:col-4 lg:col-4 sm:col-2">
         <div class="dashboard-button-group">

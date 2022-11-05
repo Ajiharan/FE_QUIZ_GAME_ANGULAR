@@ -3,7 +3,7 @@
     <ng-template pTemplate="header">
       <div class="dashboard-header">
         <div class="dashboard-header-title">
-          <h5>Timer {{ level1Timer }}s</h5>
+          <h5>Timer {{ levelTimer }}s</h5>
           <div class="game-life">
             <i
               class="pi pi-heart-fill"
@@ -17,11 +17,89 @@
             ></i>
           </div>
           <h5>Score: {{ score }}</h5>
+          <h5>Level {{ level }}</h5>
         </div>
         <app-user-avatar-profile
           [userDetails]="userDetails"
         ></app-user-avatar-profile>
       </div>
     </ng-template>
+    <div class="grid" *ngIf="livesCount > 0 && !isFinished">
+      <div class="col-12 md:col-10 lg:col-10 sm:col-12">
+        <img [src]="queAns?.question" alt="question" class="question-img" />
+      </div>
+      <div class="col-12 md:col-2 lg:col-2 sm:col-12">
+        <div class="radio-group-answers">
+          <div class="field-radiobutton" *ngFor="let item of answerArr">
+            <p-radioButton
+              name="answer"
+              [value]="item"
+              [(ngModel)]="selectedValue"
+              [inputId]="'answer' + item"
+              (onClick)="onRadioClick($event)"
+            ></p-radioButton>
+            <label [for]="'answer' + item" class="radio-label"
+              >{{ item }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="livesCount === 0 && !isFinished">
+      <div class="grid">
+        <div class="game-over">
+          <h4 class="text-danger text-center" style="width: 100%">GAME OVER</h4>
+          <button
+            pButton
+            type="button"
+            class="p-button-button-success mt-3"
+            label="Play Again"
+            (click)="startGame()"
+          ></button>
+        </div>
+      </div>
+      <div class="grid mt-3">
+        <div class="col-12 md:col-6 lg:col-6 sm:col-12">
+          <app-score-table
+            [scoreDetail]="highScoreDetail"
+            scoreName="highScore"
+          >
+          </app-score-table>
+        </div>
+        <div class="col-12 md:col-6 lg:col-6 sm:col-12">
+          <app-score-table [scoreDetail]="myScoreDetails" scoreName="score">
+          </app-score-table>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isFinished">
+      <div class="grid mt-3">
+        <div class="game-over">
+          <h4 class="text-success text-center" style="width: 100%">
+            COMPLETED
+          </h4>
+          <button
+            pButton
+            type="button"
+            class="p-button-button-success mt-3"
+            label="Play Again"
+            (click)="startGame()"
+          ></button>
+        </div>
+      </div>
+      <div class="grid mt-3">
+        <div class="col-12 md:col-6 lg:col-6 sm:col-12">
+          <app-score-table
+            [scoreDetail]="highScoreDetail"
+            scoreName="highScore"
+          >
+          </app-score-table>
+        </div>
+        <div class="col-12 md:col-6 lg:col-6 sm:col-12">
+          <app-score-table [scoreDetail]="myScoreDetails" scoreName="score">
+          </app-score-table>
+        </div>
+      </div>
+    </ng-container>
   </p-card>
 </div>

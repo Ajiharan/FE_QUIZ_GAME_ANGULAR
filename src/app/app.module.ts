@@ -24,6 +24,7 @@ import { GamePlayComponent } from './game-play/game-play.component';
 import { UserAvatarProfileComponent } from './reusable-components/user-avatar-profile/user-avatar-profile.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { ScoreTableComponent } from './reusable-components/score-table/score-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { SignupComponent } from './signup/signup.component';
     GameDashboardComponent,
     GamePlayComponent,
     UserAvatarProfileComponent,
+    ScoreTableComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@
     shape="circle"
   ></p-avatar>
   <h6>
-    {{ userDetails.user.userName | titlecase }}
+    {{ userDetails?.user.userName | titlecase }}
   </h6>
 </div>
 <p-overlayPanel
@@ -18,7 +18,7 @@
     <div class="profile-list">
       <div *ngIf="userDetails.board">
         <h6>
-          Your Score <span>{{ userDetails.board.highScore }}</span>
+          Your Hight Score <span>{{ userDetails?.board.highScore }}</span>
         </h6>
       </div>
       <button

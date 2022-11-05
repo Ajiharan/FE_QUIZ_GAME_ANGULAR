@@ -77,9 +77,9 @@ export class AccountService {
       });
   }
 
-  getHighScore(func: (response: any) => void): void {
+  getHighScore(func: (response: any) => void, path = 'board/getScores'): void {
     this.http
-      .get(`${this.baseUrl}/board/getScores`, this.masterService.getHeaders())
+      .get(`${this.baseUrl}/${path}`, this.masterService.getHeaders())
       .subscribe({
         next: (data: any) => {
           console.log('data', data);
