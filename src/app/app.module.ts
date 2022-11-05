@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -21,10 +22,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GameDashboardComponent } from './game-dashboard/game-dashboard.component';
 import { GamePlayComponent } from './game-play/game-play.component';
+import { ScoreTableComponent } from './reusable-components/score-table/score-table.component';
 import { UserAvatarProfileComponent } from './reusable-components/user-avatar-profile/user-avatar-profile.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
-import { ScoreTableComponent } from './reusable-components/score-table/score-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { ScoreTableComponent } from './reusable-components/score-table/score-tab
     TableModule,
     A11yModule,
     RadioButtonModule,
+    DialogModule,
   ],
   providers: [MessageService, CookieService],
   bootstrap: [AppComponent],

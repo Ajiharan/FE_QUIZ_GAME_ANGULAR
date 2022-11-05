@@ -12,6 +12,7 @@
     </ng-template>
     <div class="grid">
       <div class="col-12 md:col-8 lg:col-8 sm:col-10">
+        <h5>#HighScore</h5>
         <app-score-table [scoreDetail]="highScoreDetail" scoreName="highScore">
         </app-score-table>
       </div>
@@ -29,9 +30,20 @@
             type="button"
             class="p-button-outlined p-button-success"
             label="Your Score"
+            (click)="showDialog = true"
           ></button>
         </div>
       </div>
     </div>
   </p-card>
 </div>
+
+<p-dialog [(visible)]="showDialog" [style]="{ width: '60vw' }" [modal]="true">
+  <ng-template pTemplate="header">
+    <h5># My Scores</h5>
+  </ng-template>
+  <div>
+    <app-score-table [scoreDetail]="myScoreDetails" scoreName="score">
+    </app-score-table>
+  </div>
+</p-dialog>

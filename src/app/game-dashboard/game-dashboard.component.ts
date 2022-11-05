@@ -10,9 +10,15 @@ import { AccountService } from '../services/account.service';
 export class GameDashboardComponent implements OnInit {
   public userDetails: any;
   public highScoreDetail: any;
+  public myScoreDetails: any;
+
+  showDialog: boolean = false;
   constructor(public accountService: AccountService, private router: Router) {
     this.accountService.getUser((data: any) => {
       this.userDetails = data;
+      this.accountService.getHighScore((data: any) => {
+        this.myScoreDetails = data;
+      }, `score/getScores/${this.userDetails.user._id}`);
     });
     this.accountService.getHighScore((data: any) => {
       this.highScoreDetail = data;

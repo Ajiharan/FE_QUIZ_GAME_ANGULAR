@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 import { GameService } from '../services/game.service';
 
@@ -66,7 +67,8 @@ export class GamePlayComponent implements OnInit {
 
   constructor(
     public accountService: AccountService,
-    private gameService: GameService
+    private gameService: GameService,
+    private router: Router
   ) {
     this.initializeGame();
     this.getUserDetail();
@@ -156,5 +158,9 @@ export class GamePlayComponent implements OnInit {
     this.accountService.getHighScore((data: any) => {
       this.myScoreDetails = data;
     }, `score/getScores/${this.userDetails.user._id}`);
+  }
+
+  newGame(): void {
+    this.router.navigateByUrl('dashboard');
   }
 }
