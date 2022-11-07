@@ -34,7 +34,12 @@
       </ng-template>
       <div class="grid" *ngIf="livesCount > 0 && !isFinished">
         <div class="col-12 md:col-10 lg:col-10 sm:col-12">
-          <img [src]="queAns?.question" alt="question" class="question-img" />
+          <img
+            [src]="queAns?.question"
+            alt="question"
+            class="question-img"
+            loading="lazy"
+          />
         </div>
         <div class="col-12 md:col-2 lg:col-2 sm:col-12">
           <div class="radio-group-answers">
